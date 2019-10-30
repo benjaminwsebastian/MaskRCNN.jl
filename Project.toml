@@ -1,0 +1,10 @@
+name = "MaskRCNN"
+uuid = "12df67df-eb9d-46dd-ae1f-a01feb5329ae"
+authors = ["Benjamin Sebastian <bensebastian@mac.com>"]
+version = "0.1.0"
+
+[deps]
+ArgCheck = "dce04be8-c92d-5529-be00-80e4d2c0e197"
+ArgParse = "c7e460c6-2fb9-53a9-8c5b-16f535851c63"
+Images = "916415d5-f1e6-5110-898d-aaa5f9f070e0"
+Knet = "1902f260-5fb4-5aff-8c31-6271790ab950"

@@ -1,2 +1,2 @@
 # MaskRCNN
-Mask R-CNN implemented in Julia
+Julia implementation of Mask R-CNN using Knet
