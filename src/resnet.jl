@@ -1,7 +1,3 @@
-using Knet, ArgParse, Images
-using Pkg; Pkg.build("Knet")
-# DEPENDECIES JUST FOR ISOLATED TESTING - REMOVE BEFORE PUBLISHING
-
 #=
 *** rewrite for import purposes ***
 
@@ -21,58 +17,6 @@ Shaoqing Ren, Jian Sun, arXiv technical report 1512.03385, 2015.
 * Project page: https://github.com/KaimingHe/deep-residual-networks
 * MatConvNet weights used here: http://www.vlfeat.org/matconvnet/pretrained
 =#
-
-# use for testing
-include(Knet.dir("data","imagenet.jl"))
-const modelurl = "http://www.vlfeat.org/matconvnet/models/imagenet-resnet-101-dag.mat"
-const imgurl = "https://github.com/BVLC/caffe/raw/master/examples/images/cat.jpg"
-
-function main(args)
-    s = ArgParseSettings()
-    s.description = "resnet.jl (c) Ilker Kesen, 2017. Classifying images with Deep Residual Networks."
-
-    @add_arg_table s begin
-        ("image"; default=imgurl; help="Image file or URL.")
-        ("--model"; default="imagenet-resnet-101-dag"; help="resnet model name")
-        ("--top"; default=5; arg_type=Int; help="Display the top N classes")
-        ("--atype"; default=(gpu()>=0 ? "KnetArray{Float32}" : "Array{Float32}"); help="array and float type to use")
-    end
-
-    isa(args, AbstractString) && (args=split(args))
-    if in("--help", args) || in("-h", args)
-        ArgParse.show_help(s; exit_when_done=false)
-        return
-    end
-    println(s.description)
-    o = parse_args(args, s; as_symbols=true)
-    println("opts=",[(k,v) for (k,v) in o]...)
-    atype = eval(Meta.parse(o[:atype]))
-    model = matconvnet(o[:model])
-    avgimg = model["meta"]["normalization"]["averageImage"]
-    avgimg = convert(Array{Float32}, avgimg)
-    description = model["meta"]["classes"]["description"]
-    w, ms = get_params(model["params"], atype)
-
-    @info("Reading $(o[:image])")
-    img = imgdata(o[:image], avgimg)
-    img = convert(atype, img)
-
-    # get model by length of parameters
-    modeldict = Dict(
-        162 => (resnet50, "resnet50"),
-        314 => (resnet101, "resnet101"),
-        467 => (resnet152, "resnet152"))
-    !haskey(modeldict, length(w)) && error("wrong resnet MAT file")
-    resnet, name = modeldict[length(w)]
-
-    @info("Classifying with $name")
-    @time y1 = resnet(w,img,ms)
-    z1 = vec(Array(y1))
-    s1 = sortperm(z1,rev=true)
-    p1 = exp.(logp(z1))
-    display(hcat(p1[s1[1:o[:top]]], description[s1[1:o[:top]]]))
-    println()
-end
 
 # mode, 0=>train, 1=>test
 function resnet50(w,x,ms; mode=1)
@@ -209,4 +153,4 @@ end
 # This allows both non-interactive (shell command) and interactive calls like:
 # $ julia vgg.jl cat.jpg
 # julia> ResNet.main("cat.jpg")
-PROGRAM_FILE=="resnet.jl" && main(ARGS)
+#PROGRAM_FILE=="resnet.jl" && main(ARGS)

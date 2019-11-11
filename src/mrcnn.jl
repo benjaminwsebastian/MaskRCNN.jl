@@ -1,22 +1,20 @@
 #__precompile__()
 
-module mrcnn
-
-using ArgCheck
-using Knet
-using Pkg; Pkg.build("Knet")
+#using ArgCheck
+#using Knet
+#using Pkg; Pkg.build("Knet")
 # Remove these later
 
 #=
 Julia implementation of Mask R-CNN
 =#
 
-include("rpn.jl")
-include("fpn.jl")
-inclide("resnet.jl")
+#include("rpn.jl")
+#include("fpn.jl")
+#inclide("resnet.jl")
 
 
-struct MaskRCNN
+struct Mask_RCNN
     rpn
     fpn
     anchors
@@ -50,7 +48,7 @@ function config(config = nothing)
     # The strides of each layer of the FPN. These values are based on the default resnet101 backbone
     BACKBONE_STRIDES = [4, 8, 16, 32, 64]
 
-j    # The shape of the backbone
+    # The shape of the backbone
     BACKBONE_SHAPES = [256 256; 128 128; 64 64; 32 32; 166 16;]
     
     # Size of the fully-connected layers in the classifier
@@ -83,6 +81,4 @@ j    # The shape of the backbone
 
     # Define pool size
     POOL_SIZE = 7
-    
-    
-end # module
+end

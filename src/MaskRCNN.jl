@@ -1,18 +1,40 @@
 #__precompile__()
 
-module mrcnn
-
-using Knet, ArgCheck, ArgParse, Images
-using Pkg; Pkg.build("Knet")   
-
 module MaskRCNN
 
-export
-    MaskRCNN,
-    config,
-    predict,
-    update
+using Knet, ArgCheck, ArgParse, Images, FileIO, MAT
+using Pkg; Pkg.build("Knet")
 
-import("mrcnn.jl")
+#export
+#    MaskRCNN,
+#    config,
+#    predict,
+#    update
+
+export
+    clip_to_window,
+    clip_boxes,
+    resize_image,
+    mold_image,
+    compose_image_meta,
+    parse_image_meta,
+    mold_input,
+    compute_iou,
+    compute_overlaps_bbox,
+    extract_bboxes,
+    box_refinement_graph,
+    matconvnet,
+    imgdata,
+    resnet50,
+    resnet101,
+    resnet152,
+    get_params
+
+include("utils.jl")
+include("mrcnn.jl")
+include("resnet.jl")
+include("rpn.jl")
+include("fpn.jl")
+include("roi_align.jl")
 
 end # module

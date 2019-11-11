@@ -1,4 +1,3 @@
-
 #=
 Define region of interest alignment 
 =#
