@@ -1,5 +1,3 @@
-#using Test
-
 #=
 Test ROI Align operations:
 =#

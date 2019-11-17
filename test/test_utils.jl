@@ -54,7 +54,8 @@ Test utils operations:
     end
 
     @testset "Loss functions" begin
-        
+        y = 1:10
+        ŷ = 0.5:1:9.5
     end
     
     @testset "Resnet functions" begin

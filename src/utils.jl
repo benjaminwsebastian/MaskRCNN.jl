@@ -583,13 +583,7 @@ end
 #=
 Loss Functions
 =#
-#=
-function bce(ŷ, y; ϵ=cu(fill(eps(first(ŷ)), size(ŷ)...)))
-    l1 = -y.*log.(ŷ .+ ϵ)
-    l2 = (1 .- y).*log.(1 .- ŷ .+ ϵ)
-    l1 .- l2
-end
-=#
+
 #=
 function compute_rpn_class_loss(rpn_match, rpn_class_logits; labels = 1:80)
     anchor_class = Int.(rpn_match .== 1)
@@ -603,13 +597,13 @@ function compute_rpn_class_loss(rpn_match, rpn_class_logits; labels = 1:80)
     Flux.logitcrossentropy(rpn_class_logits, anchor_class)
 end
 =#
-#=
+
 function smooth_l1_loss(y, fx; δ = 1)
     α = abs(y - fx)
     abs(α) <= δ && return 0.5f0 * α ^ 2
     δ * α - (0.5f0 * δ ^ 2)
 end
-=#
+
 #=
 huber_loss(y, ŷ; kwargs...) = smooth_l1_loss(y, ŷ, kwargs...)
 =#

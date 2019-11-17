@@ -9,7 +9,7 @@ Test resnet operations:
 
         # Coming from https://github.com/denizyuret/Knet.jl/blob/master/examples/resnet/ -- license in src/resnet.jl
 
-        function run_resnet(image, model, target)
+        function test_resnet(image, model, target)
             # "resnet.jl (c) Ilker Kesen, 2017. Classifying images with Deep Residual Networks."
             
             o = Dict(:model => model, :atype => "KnetArray{Float32}", :top => 5, :image => image)
@@ -50,9 +50,9 @@ Test resnet operations:
         elephant = download("http://home.mweb.co.za/pa/pak04857/uniweb/animalimages/elephantthumb.jpg")
         cat = "https://github.com/BVLC/caffe/raw/master/examples/images/cat.jpg"
         
-        run_resnet(elephant, "imagenet-resnet-101-dag", "African elephant, Loxodonta africana")
-        run_resnet(cat, "imagenet-resnet-50-dag", "gibbon, Hylobates lar") # Should guess incorretly
-        run_resnet(cat, "imagenet-resnet-152-dag", "gibbon, Hylobates lar") # Should guess incorrectly
+        test_resnet(elephant, "imagenet-resnet-101-dag", "African elephant, Loxodonta africana")
+        test_resnet(cat, "imagenet-resnet-50-dag", "gibbon, Hylobates lar") # Should guess incorretly
+        test_resnet(cat, "imagenet-resnet-152-dag", "gibbon, Hylobates lar") # Should guess incorrectly
     end
 
 end

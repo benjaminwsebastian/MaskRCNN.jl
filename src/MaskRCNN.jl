@@ -12,13 +12,14 @@ using Pkg; Pkg.build("Knet")
 #    update
 
 export
+    smooth_l1_loss,
     clip_to_window,
     clip_boxes,
     resize_image,
     mold_image,
     compose_image_meta,
     parse_image_meta,
-    mold_input,
+    mold_inputs,
     compute_iou,
     compute_overlaps_bbox,
     extract_bboxes,
