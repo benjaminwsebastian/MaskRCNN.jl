@@ -25,10 +25,14 @@ julia> ]
 julia> exit()
 ```
 
+## Working on
+Utils  
+ROI Align
+
 ## To do
-1. Finish implementing utils
-2. RPN
-3. FPN
-4. ROI Align
+1. Finish implementing utils  
+2. RPN  
+3. FPN  
+4. ROI Align  
 ~~5. Resnet~~
-6. Design Pipeline
+6. Design Pipeline  
